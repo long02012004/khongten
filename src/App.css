@@ -1,4 +1,69 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+video {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  z-index: -10;
+}
+
+@media (max-width: 1350px) {
+  .header-container {
+    max-width: 1300px;
+  }
+}
+
+.navbar-nav,
+.navbar-brand {
+  background: rgba(182, 30, 30, 0);
+  padding-top: 10px;
+  .nav-item {
+    .nav-link,
+    .nav-link.active {
+      color: yellow;
+      &:hover {
+        color: aqua;
+      }
+    }
+  }
+}
+.navbar-nav {
+  .btn-login {
+    border-radius: 5px;
+    margin-right: 15px;
+    padding: 0 10px;
+    border: 1px solid #535353;
+    height: 40px;
+    &:hover {
+      background: rgb(31, 132, 186);
+      color: white;
+    }
+  }
+  .btn-signup {
+    border-radius: 5px;
+    padding: 0 15px;
+    background: #303030;
+    height: 40px;
+    color: white;
+    border: 1px solid #535353;
+    &:hover {
+      background: black;
+    }
+  }
+}
+.title-3 {
+  button {
+    border-radius: 5px;
+    padding: 0 15px;
+    background: #303030;
+    height: 40px;
+    color: white;
+    border: none;
+    &:hover {
+      background: black;
+    }
+  }
 }

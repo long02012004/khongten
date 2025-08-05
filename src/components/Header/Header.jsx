@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mx-5">
       <div className="container-fluid ">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
+             <NavLink to="/" className="navbar-brand">
+                Quang Long
+              </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -24,23 +24,25 @@ const Header = () => {
               {/* <a className="nav-link active" aria-current="page" href="#">
                 Home
               </a> */}
-              <Link to="/" className="nav-link active">
+              <NavLink to="/" className="nav-link active">
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/users">
+              <NavLink className="nav-link" to="/users">
                 User
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/admins">
+              <NavLink className="nav-link" to="/admins">
                 Admin
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <ul className="navbar-nav ms-auto ">
-            <li className="nav-item dropdown">
+            <button className="btn-login">Log in</button>
+            <button className="btn-signup">Sign up</button>
+           {/*  <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle text-center"
                 href="#"
@@ -67,7 +69,7 @@ const Header = () => {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
