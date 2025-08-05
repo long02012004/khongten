@@ -1,6 +1,6 @@
 import styles from "./ManageUser.module.scss";
 import Example from "./Example";
-import "./manageUser.scss"; // Assuming you have a CSS file for styling
+import "./ManageUser.scss"; // Assuming you have a CSS file for styling
 
 const ManageUser = (props) => {
   return (
