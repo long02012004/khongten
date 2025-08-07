@@ -4,13 +4,14 @@ import Modal from "react-bootstrap/Modal";
 import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Example = (props) => {
   const { show, setShow } = props;
   const handleClose = () => {
     setShow(false);
     setEmail("");
-    setPassword("");  
+    setPassword("");
     setUsername("");
     setRole("USER");
     setImage("");
@@ -25,7 +26,24 @@ const Example = (props) => {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
+  // kiem tra email
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
   const handleSubmit = async () => {
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("Invalid email format");
+      return;
+    }
+    if (!password) {
+      toast.error("Invalid password format");
+      return;
+    }
     /*   let data = {
       email: email,
       password: password,
@@ -45,6 +63,13 @@ const Example = (props) => {
       "http://localhost:8081/api/v1/participant",
       data
     );
+    if (res.data && res.data.EC === 0) {
+      toast.success(res.data.EM);
+      handleClose();
+    }
+    if (res.data && res.data.EC !== 0) {
+      toast.error(res.data.EM);
+    }
   };
 
   const handleUploadImage = (e) => {
@@ -58,10 +83,6 @@ const Example = (props) => {
 
   return (
     <>
-      {/*  <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-
       <Modal
         show={show}
         onHide={handleClose}
