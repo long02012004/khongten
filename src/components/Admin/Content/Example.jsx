@@ -3,18 +3,49 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
+import axios from "axios";
 
-const Example = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const Example = (props) => {
+  const { show, setShow } = props;
+  const handleClose = () => {
+    setShow(false);
+    setEmail("");
+    setPassword("");  
+    setUsername("");
+    setRole("USER");
+    setImage("");
+    setPreviewImage("");
+  };
+
   // State variables for form inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [, setRole] = useState("USER");
-  const [, setImage] = useState("");
+  const [role, setRole] = useState("USER");
+  const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
+
+  const handleSubmit = async () => {
+    /*   let data = {
+      email: email,
+      password: password,
+      username: username, 
+      role: role,
+      userImage: image
+    } */
+    //Chuyển đổi dữ liệu thành định dạng FormData nếu cần thiết API
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", username);
+    data.append("role", role);
+    data.append("userImage", image);
+
+    let res = await axios.post(
+      "http://localhost:8081/api/v1/participant",
+      data
+    );
+  };
 
   const handleUploadImage = (e) => {
     if (e.target && e.target.files && e.target.files[0]) {
@@ -27,9 +58,9 @@ const Example = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      {/*  <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-      </Button>
+      </Button> */}
 
       <Modal
         show={show}
@@ -105,7 +136,7 @@ const Example = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Save
           </Button>
         </Modal.Footer>
