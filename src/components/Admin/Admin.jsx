@@ -3,7 +3,7 @@ import styles from "./Admin.module.scss";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { ToastContainer, toast,  Bounce } from "react-toastify";
+import { ToastContainer,   Bounce } from "react-toastify";
 
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
