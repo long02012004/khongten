@@ -1,10 +1,12 @@
 import styles from "./ManageUser.module.scss";
-import Example from "./Example";
+
+import ModalUpdateUser from "./ModalUpdateUser";
 import "./ManageUser.scss"; // Assuming you have a CSS file for styling
 import { FcPlus } from "react-icons/fc";
 import TableUser from "./TableUser";
 import { useState, useEffect } from "react";
 import { getAllUser } from "../../../services/ApiServices";
+import ModalCreateUser from "./ModalCreateUser";
 
 const ManageUser = () => {
   const [listUsers, setListUsers] = useState([]);
@@ -18,7 +20,13 @@ const ManageUser = () => {
       setListUsers(res.data.DT);
     }
   };
-  const [showExample, setShowExample] = useState(false);
+  const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [dataUpdate, setDataUpDate] = useState({});
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    setDataUpDate(user);
+  };
   return (
     <div className={styles["manage-user-container"]}>
       <div className={styles["title"]}>Manage User Content</div>
@@ -26,18 +34,27 @@ const ManageUser = () => {
         <div className={styles["btn-add-new"]}>
           <button
             className="btn btn-primary"
-            onClick={() => setShowExample(true)}
+            onClick={() => setShowModalCreateUser(true)}
           >
             {" "}
             <FcPlus /> Add new user
           </button>
         </div>
         <div className={styles["table-users-container"]}>
-          <TableUser listUsers={listUsers} />
+          <TableUser
+            listUsers={listUsers}
+            handleClickBtnUpdate={handleClickBtnUpdate}
+          />
         </div>
-        <Example
-          show={showExample}
-          setShow={setShowExample}
+        <ModalCreateUser
+          show={showModalCreateUser}
+          setShow={setShowModalCreateUser}
+          fetchListUsers={fetchListUsers}
+        />
+        <ModalUpdateUser
+          show={showModalUpdateUser}
+          setShow={setShowModalUpdateUser}
+          dataUpdate={dataUpdate}
           fetchListUsers={fetchListUsers}
         />
       </div>
