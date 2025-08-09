@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
-import axios from "axios";
-import { postCreateNewUser } from "../../../services/apiservices";
+
+import { postCreateNewUser } from "../../../services/ApiServices";
 import { toast } from "react-toastify";
 
 const Example = (props) => {

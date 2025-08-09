@@ -3,8 +3,9 @@ import Example from "./Example";
 import "./ManageUser.scss"; // Assuming you have a CSS file for styling
 import { FcPlus } from "react-icons/fc";
 import { useState } from "react";
+import TableUser from "./TableUser";
 
-const ManageUser = (props) => {
+const ManageUser = () => {
   const [showExample, setShowExample] = useState(false);
   return (
     <div className={styles["manage-user-container"]}>
@@ -19,7 +20,9 @@ const ManageUser = (props) => {
             <FcPlus /> Add new user
           </button>
         </div>
-        <div className={styles["table-users-container"]}>table users</div>
+        <div className={styles["table-users-container"]}>
+          <TableUser />
+        </div>
         <Example show={showExample} setShow={setShowExample} />
       </div>
     </div>

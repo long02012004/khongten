@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer,   Bounce } from "react-toastify";
 
-const Admin = (props) => {
+const Admin = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
