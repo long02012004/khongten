@@ -57,6 +57,7 @@ const Example = (props) => {
     if (res.data && res.data.EC === 0) {
       toast.success(res.data.EM);
       handleClose();
+      await props.fetchListUsers();
     }
     if (res.data && res.data.EC !== 0) {
       toast.error(res.data.EM);
