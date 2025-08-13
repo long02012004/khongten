@@ -7,7 +7,7 @@ import { postCreateNewUser } from "../../../services/ApiServices";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
-const ModalUpdateUser = ({ show, setShow, dataUpdate,fetchListUsers  }) => {
+const ModalUpdateUser = ({ show, setShow, dataUpdate, fetchListUsers }) => {
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -25,7 +25,9 @@ const ModalUpdateUser = ({ show, setShow, dataUpdate,fetchListUsers  }) => {
       setUsername(dataUpdate.username);
       setRole(dataUpdate.role);
       setImage("");
-      setPreviewImage("");
+      if (dataUpdate.image) {
+        setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`); // sử dụng base 64 để hiển thị ảnh
+      }
     }
   }, [dataUpdate]);
   // State variables for form inputs
@@ -100,6 +102,7 @@ const ModalUpdateUser = ({ show, setShow, dataUpdate,fetchListUsers  }) => {
               <label className="form-label">Email</label>
               <input
                 type="email"
+                disabled
                 className="form-control"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -111,6 +114,7 @@ const ModalUpdateUser = ({ show, setShow, dataUpdate,fetchListUsers  }) => {
                 type="password"
                 className="form-control"
                 value={password}
+                disabled
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
