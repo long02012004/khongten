@@ -3,11 +3,11 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
-import { postCreateNewUser } from "../../../services/ApiServices";
+import { putUpdateUser } from "../../../services/ApiServices";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
-const ModalUpdateUser = ({ show, setShow, dataUpdate, fetchListUsers }) => {
+const ModalUpdateUser = ({ show, setShow, dataUpdate, resetUpdateData, fetchListUsers }) => {
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -16,6 +16,7 @@ const ModalUpdateUser = ({ show, setShow, dataUpdate, fetchListUsers }) => {
     setRole("USER");
     setImage("");
     setPreviewImage("");
+    resetUpdateData(); // Reset the dataUpdate state in ManageUser
   };
 
   useEffect(() => {
@@ -52,19 +53,8 @@ const ModalUpdateUser = ({ show, setShow, dataUpdate, fetchListUsers }) => {
       toast.error("Invalid email format");
       return;
     }
-    if (!password) {
-      toast.error("Invalid password format");
-      return;
-    }
-    /*   let data = {
-      email: email,
-      password: password,
-      username: username, 
-      role: role,
-      userImage: image
-    } */
 
-    let res = await postCreateNewUser(email, password, username, role, image);
+    let res = await putUpdateUser(dataUpdate.id, username, role, image);
     if (res.data && res.data.EC === 0) {
       toast.success(res.data.EM);
       handleClose();
