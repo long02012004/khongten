@@ -2,7 +2,7 @@ import VideoHomePage from "../../assets/videohome.mp4";
 import styles from "./Home.module.scss";
 import { Link, Outlet,  NavLink } from "react-router-dom";
 
-const HomePage = (props) => {
+const HomePage = () => {
   return (
     <div className={styles["homepage-container"]}>
       <video autoPlay loop muted>

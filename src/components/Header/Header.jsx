@@ -1,12 +1,17 @@
-import { Link,NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const handleClickLogin = () => {
+    navigate("/login");
+  };
+  const handleClickSignUp = () => {};
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mx-5">
       <div className="container-fluid ">
-             <NavLink to="/" className="navbar-brand">
-                Quang Long
-              </NavLink>
+        <NavLink to="/" className="navbar-brand">
+          Quang Long
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -40,9 +45,13 @@ const Header = () => {
             </li>
           </ul>
           <ul className="navbar-nav ms-auto ">
-            <button className="btn-login">Log in</button>
-            <button className="btn-signup">Sign up</button>
-           {/*  <li className="nav-item dropdown">
+            <button className="btn-login" onClick={() => handleClickLogin()}>
+              Log in
+            </button>
+            <button className="btn-signup" onClick={() => handleClickSignUp()}>
+              Sign up
+            </button>
+            {/*  <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle text-center"
                 href="#"

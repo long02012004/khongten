@@ -3,14 +3,15 @@ import Modal from "react-bootstrap/Modal";
 import { deleteUser } from "../../../services/ApiServices";
 import { toast } from "react-toastify";
 
-const ModalDeleteUser = ({ show, setShow, dataDelete, fetchListUsers }) => {
+const ModalDeleteUser = ({ show, setShow, dataDelete,  fetchListUsersWithPaginate, setCurrentPage }) => {
   const handleClose = () => setShow(false);
   const handleSubmit = async () => {
     let res = await deleteUser(dataDelete.id);
     if (res.data && res.data.EC === 0) {
       toast.success(res.data.EM);
       handleClose();
-      await fetchListUsers();
+      setCurrentPage(1);
+      await fetchListUsersWithPaginate(1);
     }
     if (res.data && res.data.EC !== 0) {
       toast.error(res.data.EM);
