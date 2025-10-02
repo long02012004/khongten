@@ -1,4 +1,5 @@
 import axios from "../utils/AxiosCustomize.jsx";
+import qs from "qs";
 const postCreateNewUser = (email, password, username, role, image) => {
   //Chuyển đổi dữ liệu thành định dạng FormData nếu cần thiết API
   const data = new FormData();
@@ -28,4 +29,41 @@ const deleteUser = (userId) => {
 const getUserWithPaginate = (page, limit) => {
   return axios.get(`/api/v1/participant?page=${page}&limit=${limit}`);
 };
-export { postCreateNewUser, getAllUser, putUpdateUser, deleteUser, getUserWithPaginate };
+const postLogin = (userEmail, userPassword) => {
+  return axios.post(
+    "/api/v1/login",
+    qs.stringify({
+      email: userEmail,
+      password: userPassword,
+    }),
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
+};
+const postSignUp = (userEmail, userPassword, userName) => {
+  return axios.post(`/api/v1/register`, {
+    email: userEmail,
+    password: userPassword,
+    username: userName,
+  });
+};
+const getQuizByUser = () => {
+  return axios.get("/api/v1/quiz-by-participant");
+};
+const getDataQuiz = (id) => {
+  return axios.get(`/api/v1/questions-by-quiz?quizId=${id}`);
+};
+export {
+  postCreateNewUser,
+  getAllUser,
+  putUpdateUser,
+  deleteUser,
+  getUserWithPaginate,
+  postLogin,
+  postSignUp,
+  getQuizByUser,
+  getDataQuiz
+};

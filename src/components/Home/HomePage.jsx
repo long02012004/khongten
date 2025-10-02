@@ -1,8 +1,12 @@
 import VideoHomePage from "../../assets/videohome.mp4";
 import styles from "./Home.module.scss";
-import { Link, Outlet,  NavLink } from "react-router-dom";
+import { Link, Outlet, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const navigate = useNavigate();
   return (
     <div className={styles["homepage-container"]}>
       <video autoPlay loop muted>
@@ -13,7 +17,22 @@ const HomePage = () => {
         <p className={styles["homepage-description"]}>
           Discover amazing content and connect with our community.
         </p>
-        <button className={styles["homepage-button"]}>Explore Now</button>
+        {isAuthenticated === false ? (
+          <button
+            className={styles["homepage-button"]}
+            onClick={() => navigate("./login")}
+          >
+            Explore Now
+          </button>
+        ) : (
+          <button
+            className={styles["homepage-button"]}
+            onClick={() => navigate("./users")}
+          >
+            {" "}
+            Doing quiz now
+          </button>
+        )}
       </div>
     </div>
   );

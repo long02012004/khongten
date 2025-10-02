@@ -4,8 +4,8 @@ import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
 import ModalDeleteUser from "./ModalDeleteUser";
 import TableUserPaginate from "./TableUserPaginate";
-import "./ManageUser.scss";
-import { FcPlus } from "react-icons/fc";
+/* import "./ManageUser.scss";
+ */import { FcPlus } from "react-icons/fc";
 import TableUser from "./TableUser";
 import { useState, useEffect } from "react";
 import { getAllUser, getUserWithPaginate } from "../../../services/ApiServices";
@@ -112,7 +112,7 @@ const ManageUser = () => {
         />
         <ModalDeleteUser
           show={showModalDeleteUser}
-          setShow={setShowModalDeleteUser}
+          setShow={setShowModalDeleteUser}  
           dataDelete={dataDelete}
           fetchListUsers={fetchListUsers}
           fetchListUsersWithPaginate={fetchListUsersWithPaginate}

@@ -1,0 +1,72 @@
+.login-container {
+  .spinner {
+    font-size: 14px;
+    margin-right: 12px;
+    color: #00d4ff;
+    animation: spin 1s linear infinite;
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  .header {
+    height: 45px;
+    text-align: right;
+    padding: 5px 100px 0 100px;
+
+    button {
+      padding: 3px 15px;
+      margin-left: 15px;
+      border-radius: 5px;
+      background: rgb(215, 212, 212);
+      border: 1px solid black;
+      &:hover {
+        background: black;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+  .title {
+    font-size: 25px;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .welcome {
+    font-size: 20px;
+    padding: 10px 0;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .content-form {
+    width: 400px;
+    .form-group {
+      width: 100%;
+    }
+    input {
+      margin-bottom: 15px;
+      margin-top: 3px;
+    }
+    .btn-submit {
+      cursor: pointer;
+      width: 100%;
+      border: none;
+      margin: 20px 0;
+      color: white;
+      background-color: black;
+      height: 35px;
+      &:disabled {
+        background-color: #dddddd;
+        color: #fafafa;
+        cursor: no-drop;
+      }
+    }
+    .back {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,11 +1,27 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const account = useSelector((state) => state.user.account);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Xoá token hoặc flag login
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("token"); // nếu bạn lưu token
+
+    navigate("/login");
+  };
+
   const handleClickLogin = () => {
     navigate("/login");
   };
-  const handleClickSignUp = () => {};
+
+  const handleClickSignUp = () => {
+    navigate("/signup");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mx-5">
       <div className="container-fluid ">
@@ -26,9 +42,6 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item">
-              {/* <a className="nav-link active" aria-current="page" href="#">
-                Home
-              </a> */}
               <NavLink to="/" className="nav-link active">
                 Home
               </NavLink>
@@ -45,40 +58,46 @@ const Header = () => {
             </li>
           </ul>
           <ul className="navbar-nav ms-auto ">
-            <button className="btn-login" onClick={() => handleClickLogin()}>
-              Log in
-            </button>
-            <button className="btn-signup" onClick={() => handleClickSignUp()}>
-              Sign up
-            </button>
-            {/*  <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle text-center"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Settings
-              </a>
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    LogIn
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    LogOut
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Profile
-                  </a>
-                </li>
-              </ul>
-            </li> */}
+            {!isAuthenticated ? (
+              // chưa đăng nhập -> hiện login, signup
+              <>
+                <button className="btn-login" onClick={handleClickLogin}>
+                  Log in
+                </button>
+                <button className="btn-signup" onClick={handleClickSignUp}>
+                  Sign up
+                </button>
+              </>
+            ) : (
+              // đã đăng nhập -> hiện settings
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle text-center"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Settings
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={handleLogout} // ✅ sửa thành handleLogout
+                    >
+                      LogOut
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Profile
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            )}
           </ul>
         </div>
       </div>
