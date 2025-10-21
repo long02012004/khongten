@@ -1,5 +1,5 @@
 import "react-pro-sidebar/dist/css/styles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ProSidebar,
   Menu,
@@ -23,6 +23,7 @@ import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
 
 const SideBar = (props) => {
+  const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
   return (
     <>
@@ -47,24 +48,36 @@ const SideBar = (props) => {
             }}
           >
             <DiReact size={"3em"} color={"#61dafb"}></DiReact>
-            Quang Long
+            <span onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+              Quang Long
+            </span>
           </div>
         </SidebarHeader>
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem icon={<MdDashboard />}>Dashboard
+            <MenuItem icon={<MdDashboard />}>
+              Dashboard
               <Link to="/admins" />
             </MenuItem>
             {/*  <MenuItem icon={<FaGem />}> Components </MenuItem> */}
           </Menu>
           <Menu iconShape="circle">
             <SubMenu icon={<FaGem />} title="Features">
-              <MenuItem> Quản lý người dùng
+              <MenuItem>
+                {" "}
+                Quản lý người dùng
                 <Link to="/admins/manage-users" />
               </MenuItem>
-              <MenuItem> Quản lý sản phẩm</MenuItem>
-              <MenuItem> Quản lý đơn hàng</MenuItem>
+              <MenuItem>
+                {" "}
+                Quản lý Bài Quiz
+                <Link to="/admins/manage-quizzes" />
+              </MenuItem>
+              <MenuItem>
+                Quản lý câu hỏi
+                <Link to="/admins/manage-questions" />
+              </MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>

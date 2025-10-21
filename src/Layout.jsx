@@ -10,6 +10,8 @@ import SignUp from "./components/Auth/SignUp/SignUp.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import ListQuiz from "./components/User/ListQuiz.jsx";
 import DetailQuiz from "./components/User/DetailQuiz.jsx";
+import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz.jsx";
+import Questions from "./components/Admin/Content/Questions/Questions.jsx";
 
 const NotFound = () => {
   return (
@@ -31,6 +33,8 @@ const Layout = () => {
         <Route path="/admins" element={<Admin />}>
           <Route index element={<Dashboard />} />
           <Route path="manage-users" element={<ManageUser />} />
+          <Route path="manage-quizzes" element={<ManageQuiz />} />
+          <Route path="manage-questions" element={<Questions />} />
         </Route>
 
         <Route path="/login" element={<Login />} />
